@@ -1,6 +1,6 @@
-package linklist;
+package main.linklist;
 
-public class Node <E>
+class Node <E>
 {
     private E data;
     private Node<E> next;
@@ -16,13 +16,15 @@ public class Node <E>
     @Override
     public String toString()
     {
+        StringBuilder sb = new StringBuilder();
         try
         {
-            return this.data.toString() + "->" + next.data.toString();
+            sb.append(this.data.toString()).append("->");
         }
         catch (NullPointerException e)
         {
-            return this.data.toString() + "->X";
+            sb.append("->X");
         }
+        return sb.toString();
     }
 }
