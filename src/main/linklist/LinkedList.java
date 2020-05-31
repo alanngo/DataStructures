@@ -171,10 +171,13 @@ public class LinkedList<E>
         while(curr.getNext() != null)
             curr = curr.getNext();
 
+        // change next of last node to previous head
         curr.setNext(head);
 
+        // change head to (n + 1)th node
         head = nthNode.getNext();
 
+        // set nth node to null
         nthNode.setNext(null);
     }
 
