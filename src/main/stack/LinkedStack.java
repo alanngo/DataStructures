@@ -2,22 +2,16 @@ package main.stack;
 
 import java.util.*;
 
-import static java.util.Arrays.*;
-
-public class ArrayStack<E> extends Stack<E>
+public class LinkedStack <E> extends Stack<E>
 {
-    private static final int DEFAULT_SIZE = 10;
-    Object [] elements;
+    Node<E> head;
+    Node<E> tail;
 
-
-    public ArrayStack(int s)
+    public LinkedStack()
     {
         super();
-        elements = new Object[s];
-        fill(elements, null);
+        head = tail = null;
     }
-
-    public ArrayStack() {this(DEFAULT_SIZE);}
 
     /**
      * inserts element to stack
@@ -27,9 +21,18 @@ public class ArrayStack<E> extends Stack<E>
     @Override
     public void push(E elem)
     {
-        if (size == elements.length)
-            return;
-        elements[size] = elem;
+        Node<E> tmp = new Node<>(elem);
+
+        if (empty())
+            head = tail = tmp;
+        else
+        {
+            // add element at end
+            tail.setNext(tmp);
+
+            //make the tail the tmp node
+            tail = tmp;
+        }
         size++;
     }
 
@@ -41,7 +44,20 @@ public class ArrayStack<E> extends Stack<E>
     {
         if (empty())
             throw new EmptyStackException();
-        elements[size] = null;
+
+
+        Node<E> tmp = head;
+
+        while (tmp!=null)
+        {
+            if(tmp.getNext().getData().equals(peek()))
+            {
+                tmp .setNext(null);
+                tail = tmp;
+                break;
+            }
+            tmp = tmp.getNext();
+        }
         size --;
     }
 
@@ -51,7 +67,7 @@ public class ArrayStack<E> extends Stack<E>
     @Override
     public void clear()
     {
-        fill(elements, null);
+        head = tail = null;
         super.clear();
     }
 
@@ -64,10 +80,14 @@ public class ArrayStack<E> extends Stack<E>
     @Override
     public boolean contains(E elem)
     {
-        for (Object e: elements)
+        Node<E> tmp = head;
+
+        while (tmp!=null)
         {
-            if (e.equals(elem))
+            if (tmp.getData().equals(elem))
                 return true;
+
+            tmp = tmp.getNext();
         }
         return false;
     }
@@ -75,10 +95,10 @@ public class ArrayStack<E> extends Stack<E>
     /**
      * checks stack if empty
      *
-     * @return true if size == 0
+     * @return true if size == 0 or head == null
      */
     @Override
-    public boolean empty() {return super.empty();}
+    public boolean empty() {return this.head==null || super.empty();}
 
     /**
      * gets current size of stack
@@ -86,7 +106,9 @@ public class ArrayStack<E> extends Stack<E>
      * @return current size
      */
     @Override
-    public int size() {return super.size();}
+    public int size() {
+        return super.size();
+    }
 
     /**
      * gets the top of the stack
@@ -94,8 +116,7 @@ public class ArrayStack<E> extends Stack<E>
      * @return element on top of stack
      */
     @Override
-    @SuppressWarnings("unchecked")
-    public E peek() { return(E) elements[size-1]; }
+    public E peek() { return tail.getData(); }
 
     /**
      * Returns a string representation of the object. In general, the
@@ -121,11 +142,6 @@ public class ArrayStack<E> extends Stack<E>
     @Override
     public String toString()
     {
-        StringBuilder sb = new StringBuilder();
-        for (int i = size -1; i>=0; i--)
-            sb.append("[").append(elements[i].toString()).append("]\n");
-        return sb.toString();
+        return super.toString();
     }
-
-
 }

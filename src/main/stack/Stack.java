@@ -1,45 +1,49 @@
 package main.stack;
 
-public interface Stack <E>
+abstract class Stack <E>
 {
+     protected int size;
+
+     Stack() { size = 0;}
+
      /**
      * inserts element to stack
       * @param elem: element to be inserted
       * */
-     void push(E elem);
+     protected abstract void push(E elem);
 
      /**
       * removes top element from stack
       * */
-     void pop();
+     protected abstract void pop();
 
      /**
-      * clears stack
+      * clears stack by setting size = 0
       * */
-     void clear();
+     protected void clear(){ size = 0;}
 
      /**
       * checks stack for certain element
       * @param elem: element to be searched for
       * @return true if element exists in stack
       * */
-     boolean contains(E elem);
+     protected abstract boolean contains(E elem);
 
      /**
       * checks stack if empty
       * @return true if size == 0
       * */
-     boolean empty();
+     protected boolean empty() { return size ==0;}
 
      /**
       * gets current size of stack
       * @return current size
       * */
-     int size();
+     protected int size() {return size; }
 
      /**
       * gets the top of the stack
       * @return element on top of stack
       * */
-     Object peek();
+     protected abstract E peek();
 }
