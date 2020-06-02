@@ -106,9 +106,7 @@ public class LinkedStack <E> extends Stack<E>
      * @return current size
      */
     @Override
-    public int size() {
-        return super.size();
-    }
+    public int size() { return super.size();}
 
     /**
      * gets the top of the stack

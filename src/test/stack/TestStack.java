@@ -54,7 +54,7 @@ public class TestStack
         stack.push("Houston");
         stack.push("San Antonio");
         out.println(stack);
-        assertTrue(stack.contains("Austin"));
+        assertTrue(stack.contains("Dallas"));
     }
 
     @Test
