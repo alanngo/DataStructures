@@ -25,23 +25,39 @@ public class Search<E extends Comparable<E>>
 
     public int binarySearch(E elem)
     {
+        // item does not exist
+        if (left > right)
+        {
+            left = 0;
+            right = arr.length -1;
+            return -1;
+        }
+
         int mid = (left + right) /2;
 
+        //check right hand side
         if (arr[mid].compareTo(elem) > 0)
         {
             right = mid -1;
             return binarySearch(elem);
         }
 
+        //check left hand side
         if (arr[mid].compareTo(elem) < 0)
         {
             left = mid +1;
             return binarySearch(elem);
         }
+        // item has been found
+        if (arr[mid].compareTo(elem) == 0)
+        {
+            left = 0;
+            right = arr.length -1;
+            return mid;
+        }
 
-        left = 0;
-        right = arr.length -1;
-        return mid;
+        // should never go here
+       throw new RuntimeException("binary search failed");
     }
 
 }

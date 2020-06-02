@@ -32,7 +32,7 @@ public class TestSearch
     public void test2() //binary search w/ odd num of elements
     {
         Search<String> s = new Search<>(arr0);
-
+        assertEquals(s.binarySearch("HTML"), -1);
         assertEquals(s.binarySearch("Java"), 1);
         assertEquals(s.binarySearch("C"), 0);
         assertEquals(s.binarySearch("Python"), 3);
