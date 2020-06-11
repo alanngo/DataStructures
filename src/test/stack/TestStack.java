@@ -1,7 +1,10 @@
 package test.stack;
 
 import main.stack.*;
-import org.junit.Test;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
+
+import java.util.EmptyStackException;
 
 import static java.lang.System.*;
 import static org.junit.Assert.*;
@@ -164,5 +167,19 @@ public class TestStack
 
         out.println(stack);
         assertTrue(stack.empty());
+    }
+
+    @Rule
+    public ExpectedException ee = ExpectedException.none();
+    @Test
+    public void test12() // push, clear, empty
+    {
+        ee.expect(EmptyStackException.class);
+        LinkedStack<String> stack = new LinkedStack<>();
+        stack.clear();
+        stack.pop();
+        out.println(stack);
+        assertTrue(stack.empty());
+
     }
 }
